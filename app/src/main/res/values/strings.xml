@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Lydia RandomUser</string>
+
+    <string name="user_adapter_user_picture">User picture</string>
 </resources>
