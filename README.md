@@ -10,6 +10,7 @@ Build an app that fetch data from this service: https://api.randomuser.me (use h
 - The app must be in Kotlin, any third-party libraries are allowed but you'll have to justify why you use them.
 - Evaluate the time it should take before starting, and give it with your work, with the time it really took.
 
+
 ## Development estimation
 
 Here is how I propose to develop the application: 

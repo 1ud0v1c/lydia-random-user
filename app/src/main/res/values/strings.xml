@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">Lydia RandomUser</string>
 
+    <string name="action_retry">Retry</string>
+
     <string name="user_adapter_user_picture">User picture</string>
+    <string name="user_adapter_user_name">%s %s</string>
 </resources>
