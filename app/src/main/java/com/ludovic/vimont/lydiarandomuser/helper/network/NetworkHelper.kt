@@ -1,4 +1,4 @@
-package com.ludovic.vimont.lydiarandomuser.helper
+package com.ludovic.vimont.lydiarandomuser.helper.network
 
 import android.content.Context
 import android.net.ConnectivityManager

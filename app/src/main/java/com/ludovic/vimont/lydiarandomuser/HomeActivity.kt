@@ -10,12 +10,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.ludovic.vimont.lydiarandomuser.databinding.ActivityHomeBinding
 import com.ludovic.vimont.lydiarandomuser.helper.DataStatus
-import com.ludovic.vimont.lydiarandomuser.helper.NetworkHelper
+import com.ludovic.vimont.lydiarandomuser.helper.network.ConnectionLiveData
+import com.ludovic.vimont.lydiarandomuser.helper.network.NetworkHelper
 
 class HomeActivity : AppCompatActivity() {
     private val userAdapter = HomeUserAdapter(ArrayList())
     private lateinit var mainBinding: ActivityHomeBinding
     private lateinit var homeViewModel: HomeViewModel
+    private lateinit var connectionLiveData: ConnectionLiveData
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,9 +31,22 @@ class HomeActivity : AppCompatActivity() {
             homeViewModel.loadUsers()
         }
 
+        connectionLiveData = ConnectionLiveData(applicationContext)
         homeViewModel = ViewModelProvider.AndroidViewModelFactory(application).create(HomeViewModel::class.java)
-        homeViewModel.isNetworkAvailable.value = NetworkHelper.isOnline(applicationContext)
+        updateNetworkStatus()
+
         homeViewModel.loadUsers()
+        updateUsersList()
+    }
+
+    private fun updateNetworkStatus() {
+        homeViewModel.isNetworkAvailable.value = NetworkHelper.isOnline(applicationContext)
+        connectionLiveData.observe(this) {
+            homeViewModel.isNetworkAvailable.value = it
+        }
+    }
+
+    private fun updateUsersList() {
         homeViewModel.stateDataUsers.observe(this) { stateData ->
             when (stateData.status) {
                 DataStatus.SUCCESS -> {
