@@ -1,15 +1,16 @@
 package com.ludovic.vimont.lydiarandomuser
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.ludovic.vimont.lydiarandomuser.helper.DataStatus
 import com.ludovic.vimont.lydiarandomuser.helper.StateData
 import com.ludovic.vimont.lydiarandomuser.model.User
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class HomeViewModel : ViewModel() {
-    private val userRepository = HomeUserRepository()
+class HomeViewModel(application: Application): AndroidViewModel(application) {
+    private val userRepository = HomeUserRepository(application.applicationContext)
     private var page: Int = 1
     var isNetworkAvailable = MutableLiveData<Boolean>()
     var stateDataUsers = MutableLiveData<StateData<List<User>>>()

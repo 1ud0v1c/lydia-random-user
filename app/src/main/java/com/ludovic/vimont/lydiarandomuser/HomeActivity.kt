@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
@@ -12,9 +13,9 @@ import com.ludovic.vimont.lydiarandomuser.helper.DataStatus
 import com.ludovic.vimont.lydiarandomuser.helper.NetworkHelper
 
 class HomeActivity : AppCompatActivity() {
-    private lateinit var mainBinding: ActivityHomeBinding
-    private val homeViewModel = HomeViewModel()
     private val userAdapter = HomeUserAdapter(ArrayList())
+    private lateinit var mainBinding: ActivityHomeBinding
+    private lateinit var homeViewModel: HomeViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +29,7 @@ class HomeActivity : AppCompatActivity() {
             homeViewModel.loadUsers()
         }
 
+        homeViewModel = ViewModelProvider.AndroidViewModelFactory(application).create(HomeViewModel::class.java)
         homeViewModel.isNetworkAvailable.value = NetworkHelper.isOnline(applicationContext)
         homeViewModel.loadUsers()
         homeViewModel.stateDataUsers.observe(this) { stateData ->

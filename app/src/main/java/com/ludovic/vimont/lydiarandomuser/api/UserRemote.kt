@@ -3,7 +3,7 @@ package com.ludovic.vimont.lydiarandomuser.api
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class UserRemoteAPI {
+class UserRemote {
     val api: RandomUserAPI
 
     init {
