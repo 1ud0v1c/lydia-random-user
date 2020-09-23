@@ -1,4 +1,4 @@
-package com.ludovic.vimont.lydiarandomuser
+package com.ludovic.vimont.lydiarandomuser.screens.home
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.transition.DrawableCrossFadeFactory
+import com.ludovic.vimont.lydiarandomuser.R
 import com.ludovic.vimont.lydiarandomuser.model.User
 import java.util.*
 import kotlin.collections.ArrayList
@@ -18,6 +19,7 @@ class HomeUserAdapter(private val users: ArrayList<User>): RecyclerView.Adapter<
     companion object {
         const val FADE_IN_DURATION = 300
     }
+    var onItemClick: ((User) -> Unit)? = null
     var onBottomReached: (() -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
@@ -50,6 +52,9 @@ class HomeUserAdapter(private val users: ArrayList<User>): RecyclerView.Adapter<
         holder.textViewUsername.text = username
         holder.textViewUserEmail.text = user.email
 
+        holder.itemView.setOnClickListener {
+            onItemClick?.invoke(user)
+        }
         if (position == users.size - 2) {
             onBottomReached?.invoke()
         }

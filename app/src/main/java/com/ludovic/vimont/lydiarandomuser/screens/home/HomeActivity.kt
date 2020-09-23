@@ -1,5 +1,6 @@
-package com.ludovic.vimont.lydiarandomuser
+package com.ludovic.vimont.lydiarandomuser.screens.home
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -8,12 +9,17 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
+import com.ludovic.vimont.lydiarandomuser.R
 import com.ludovic.vimont.lydiarandomuser.databinding.ActivityHomeBinding
 import com.ludovic.vimont.lydiarandomuser.helper.DataStatus
 import com.ludovic.vimont.lydiarandomuser.helper.network.ConnectionLiveData
 import com.ludovic.vimont.lydiarandomuser.helper.network.NetworkHelper
+import com.ludovic.vimont.lydiarandomuser.screens.detail.DetailActivity
 
 class HomeActivity : AppCompatActivity() {
+    companion object {
+        const val KEY_USER_EMAIL = "home_activity_user_email"
+    }
     private val userAdapter = HomeUserAdapter(ArrayList())
     private lateinit var mainBinding: ActivityHomeBinding
     private lateinit var homeViewModel: HomeViewModel
@@ -27,6 +33,11 @@ class HomeActivity : AppCompatActivity() {
         val recyclerViewAlbums: RecyclerView = mainBinding.recyclerViewUsers
         recyclerViewAlbums.adapter = userAdapter
         recyclerViewAlbums.layoutManager = LinearLayoutManager(applicationContext)
+        userAdapter.onItemClick = { clickedUser ->
+            val intent = Intent(applicationContext, DetailActivity::class.java)
+            intent.putExtra(KEY_USER_EMAIL, clickedUser.email)
+            startActivity(intent)
+        }
         userAdapter.onBottomReached = {
             homeViewModel.loadUsers()
         }

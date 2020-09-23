@@ -1,4 +1,4 @@
-package com.ludovic.vimont.lydiarandomuser
+package com.ludovic.vimont.lydiarandomuser.screens.home
 
 import android.content.Context
 import com.ludovic.vimont.lydiarandomuser.api.RandomUserAPI
@@ -10,7 +10,7 @@ import com.ludovic.vimont.lydiarandomuser.model.RandomUserResponse
 import com.ludovic.vimont.lydiarandomuser.model.User
 import retrofit2.Response
 
-class HomeUserRepository(context: Context) {
+class HomeRepository(context: Context) {
     private val userDao: UserDao = UserLocal(context).userDatabase.userDao()
     private val userRemoteApi: RandomUserAPI = UserRemote().api
 
@@ -26,7 +26,7 @@ class HomeUserRepository(context: Context) {
         }
     }
 
-    private fun loadUsersFromDatabase(page: Int): StateData<List<User>> {
+    private suspend fun loadUsersFromDatabase(page: Int): StateData<List<User>> {
         val numberOfItemsPerRequest: Int = RandomUserAPI.NUMBER_OF_ITEM_PER_REQUEST
         val offset: Int = page * numberOfItemsPerRequest
         return StateData.success(userDao.get(offset, numberOfItemsPerRequest))

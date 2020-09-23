@@ -1,19 +1,19 @@
 package com.ludovic.vimont.lydiarandomuser.database
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.ludovic.vimont.lydiarandomuser.model.User
 
 @Dao
 interface UserDao {
     @Query("SELECT count(email) FROM user")
-    fun count(): Int
+    suspend fun count(): Int
+
+    @Query("SELECT * FROM user WHERE email=:email ")
+    suspend fun get(email: String): User
 
     @Query("SELECT * FROM user LIMIT :limit OFFSET :offset")
-    fun get(offset: Int, limit: Int): List<User>
+    suspend fun get(offset: Int, limit: Int): List<User>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(users: List<User>)
+    suspend fun insert(users: List<User>)
 }

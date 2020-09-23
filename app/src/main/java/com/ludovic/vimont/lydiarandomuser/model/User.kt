@@ -2,6 +2,8 @@ package com.ludovic.vimont.lydiarandomuser.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.text.SimpleDateFormat
+import java.util.*
 
 @Entity
 data class User(val nat: String,
@@ -17,11 +19,15 @@ data class User(val nat: String,
                 val email: String,
                 val id: Id?,
                 val picture: Picture) {
+    companion object {
+        const val DATE_FORMAT = "dd MMM YYYY"
+    }
+
     @Entity
     data class Name(
-        val last: String,
         val title: String,
-        val first: String
+        val first: String,
+        val last: String
     )
 
     @Entity
@@ -29,8 +35,14 @@ data class User(val nat: String,
         val city: String,
         val street: String,
         val postcode: String,
-        val state: String
-    )
+        val state: String) {
+        override fun toString(): String {
+            val locale: Locale = Locale.getDefault()
+            return "${street.capitalize(locale)}\n" +
+                    "$postcode ${city.toUpperCase(locale)}\n" +
+                    state.capitalize(locale)
+        }
+    }
 
     @Entity
     data class Login(
@@ -51,7 +63,37 @@ data class User(val nat: String,
     @Entity
     data class Picture(
         val thumbnail: String,
-        val large: String,
-        val medium: String
+        val medium: String,
+        val large: String
     )
+
+    fun getUserCompleteName(): String {
+        val defaultLocale: Locale = Locale.getDefault()
+        return "${name.title.capitalize(defaultLocale)} " +
+                "${name.first.capitalize(defaultLocale)} " +
+                name.last.capitalize(defaultLocale)
+    }
+
+    fun getCountryName(): String {
+        val loc = Locale("", nat)
+        return loc.displayCountry
+    }
+
+    fun getDateOfBirth(): String {
+        return getDateTime(dob) ?: ""
+    }
+
+    fun getRegistrationDate(): String {
+        return getDateTime(registered) ?: ""
+    }
+
+    private fun getDateTime(timestamp: Long): String? {
+        return try {
+            val dateFormat = SimpleDateFormat(DATE_FORMAT, Locale.getDefault())
+            val date = Date(timestamp * 1_000)
+            dateFormat.format(date)
+        } catch (e: Exception) {
+            e.toString()
+        }
+    }
 }

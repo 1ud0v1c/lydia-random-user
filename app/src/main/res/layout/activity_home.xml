@@ -6,6 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/activityBackground"
-    android:paddingHorizontal="8dp"
-    android:paddingTop="8dp"
-    tools:context=".HomeActivity" />
+    android:paddingHorizontal="@dimen/activity_horizontal_little_margin"
+    android:paddingTop="@dimen/activity_vertical_little_margin"
+    tools:context=".screens.home.HomeActivity" />

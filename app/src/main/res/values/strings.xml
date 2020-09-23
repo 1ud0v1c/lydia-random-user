@@ -3,6 +3,17 @@
 
     <string name="action_retry">Retry</string>
 
-    <string name="user_adapter_user_picture">User picture</string>
+    <string name="user_adapter_user_picture_content_description">User picture</string>
     <string name="user_adapter_user_name">%s %s</string>
+
+    <string name="detail_activity_user_country">Country: %s</string>
+    <string name="detail_activity_user_dob">Date of birth: %s</string>
+    <string name="detail_activity_user_registration_date">Registered: %s</string>
+    <string name="detail_activity_user_email">Email: %s</string>
+    <string name="detail_activity_user_username">Username: %s</string>
+    <string name="detail_activity_user_password">Password: %s</string>
+    <string name="detail_activity_user_phone">Phone: %s</string>
+    <string name="detail_activity_user_cell">Cell: %s</string>
+
+    <string name="detail_activity_user_picture_content_description">Detail activity user picture</string>
 </resources>
