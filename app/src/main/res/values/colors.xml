@@ -8,4 +8,5 @@
     <color name="userBackground">#F0F0F0</color>
     <color name="iconColor">#9A9CA4</color>
     <color name="pictureBorder">#151624</color>
+    <color name="textViewPressed">#D1D1D1</color>
 </resources>

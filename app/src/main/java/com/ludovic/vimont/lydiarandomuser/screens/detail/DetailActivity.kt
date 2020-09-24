@@ -1,5 +1,6 @@
 package com.ludovic.vimont.lydiarandomuser.screens.detail
 
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
@@ -69,6 +70,7 @@ class DetailActivity : AppCompatActivity() {
 
     private fun bindClick(user: User) {
         detailBinding.textViewUserCell.setOnClickListener {
+            it.setBackgroundColor(Color.YELLOW);
             IntentHelper.launchCall(applicationContext, user.cell)
         }
         detailBinding.textViewUserPhone.setOnClickListener {
