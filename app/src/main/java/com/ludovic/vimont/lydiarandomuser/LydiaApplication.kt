@@ -15,7 +15,17 @@ class LydiaApplication: Application() {
     override fun onCreate() {
         super.onCreate()
 
-        val networkModule: Module = module {
+        val networkModule: Module = buildNetworkModule()
+        val databaseModule: Module = buildDatabaseModule()
+
+        startKoin {
+            androidContext(this@LydiaApplication)
+            modules(listOf(networkModule, databaseModule))
+        }
+    }
+
+    private fun buildNetworkModule(): Module {
+        return module {
             fun provideRetrofit(): Retrofit {
                 return Retrofit.Builder()
                     .baseUrl(RandomUserAPI.BASE_URL)
@@ -23,17 +33,20 @@ class LydiaApplication: Application() {
                     .build()
             }
 
-            fun providerRandomUserAPI(retrofit: Retrofit) = retrofit.create(RandomUserAPI::class.java)
+            fun providerRandomUserAPI(retrofit: Retrofit) =
+                retrofit.create(RandomUserAPI::class.java)
 
             single {
                 provideRetrofit()
             }
-            factory {
+            single {
                 providerRandomUserAPI(get())
             }
         }
+    }
 
-        val databaseModule: Module = module {
+    private fun buildDatabaseModule(): Module {
+        return module {
             single {
                 val databaseName: String = UserDatabase.DATABASE_NAME
                 Room.databaseBuilder(androidContext(), UserDatabase::class.java, databaseName)
@@ -43,11 +56,6 @@ class LydiaApplication: Application() {
             single {
                 get<UserDatabase>().userDao()
             }
-        }
-
-        startKoin {
-            androidContext(this@LydiaApplication)
-            modules(listOf(networkModule, databaseModule))
         }
     }
 }

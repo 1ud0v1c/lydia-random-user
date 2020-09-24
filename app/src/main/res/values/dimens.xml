@@ -10,7 +10,7 @@
     <dimen name="user_adapter_email_size">16sp</dimen>
 
     <dimen name="activity_detail_linear_layout_user_info_margin_top">64dp</dimen>
-    <dimen name="activity_detail_user_picture_height">128dp</dimen>
+    <dimen name="activity_detail_user_picture_size">128dp</dimen>
     <dimen name="activity_detail_user_picture_negative_margin">-64dp</dimen>
     <dimen name="activity_detail_user_name_size">22sp</dimen>
     <dimen name="activity_detail_user_nationality_size">16sp</dimen>
