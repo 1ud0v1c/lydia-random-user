@@ -7,6 +7,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.ludovic.vimont.lydiarandomuser.R
 import com.ludovic.vimont.lydiarandomuser.databinding.ActivityDetailBinding
+import com.ludovic.vimont.lydiarandomuser.helper.IntentHelper
 import com.ludovic.vimont.lydiarandomuser.model.User
 import com.ludovic.vimont.lydiarandomuser.screens.home.HomeActivity
 import com.ludovic.vimont.lydiarandomuser.screens.home.HomeViewModel
@@ -26,6 +27,7 @@ class DetailActivity : AppCompatActivity() {
         detailViewModel = ViewModelProvider.AndroidViewModelFactory(application).create(DetailViewModel::class.java)
         detailViewModel.user.observe(this) { user ->
             updateUser(user)
+            bindClick(user)
         }
 
         intent.extras?.let { bundle ->
@@ -39,7 +41,7 @@ class DetailActivity : AppCompatActivity() {
 
     private fun updateUser(user: User) {
         Glide.with(applicationContext)
-            .load(user.picture.medium)
+            .load(user.picture.large)
             .placeholder(R.drawable.user_default_picture)
             .transition(DrawableTransitionOptions.withCrossFade(FADE_IN_DURATION))
             .into(detailBinding.imageViewUserPicture)
@@ -63,5 +65,17 @@ class DetailActivity : AppCompatActivity() {
         detailBinding.textViewUserPassword.text = getString(R.string.detail_activity_user_password, user.login.password)
 
         detailBinding.textViewUserLocation.text = user.location.toString()
+    }
+
+    private fun bindClick(user: User) {
+        detailBinding.textViewUserCell.setOnClickListener {
+            IntentHelper.launchCall(applicationContext, user.cell)
+        }
+        detailBinding.textViewUserPhone.setOnClickListener {
+            IntentHelper.launchCall(applicationContext, user.phone)
+        }
+        detailBinding.textViewUserLocation.setOnClickListener {
+            IntentHelper.launchMaps(applicationContext, user.getGoogleMapsURL())
+        }
     }
 }

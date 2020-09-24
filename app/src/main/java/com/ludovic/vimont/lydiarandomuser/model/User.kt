@@ -96,4 +96,9 @@ data class User(val nat: String,
             e.toString()
         }
     }
+
+    fun getGoogleMapsURL(): String {
+        val googleURL = "https://www.google.com/maps/search/?api=1&query="
+        return "$googleURL${location.street}+${location.postcode}+${location.city}+${getCountryName()}"
+    }
 }
