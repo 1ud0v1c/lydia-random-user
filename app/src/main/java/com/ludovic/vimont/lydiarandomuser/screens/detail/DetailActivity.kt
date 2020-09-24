@@ -2,6 +2,7 @@ package com.ludovic.vimont.lydiarandomuser.screens.detail
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import com.bumptech.glide.Glide
@@ -57,6 +58,12 @@ class DetailActivity : AppCompatActivity() {
             R.drawable.ic_female
         }
         detailBinding.textViewUserName.setCompoundDrawablesWithIntrinsicBounds(0, 0, genderId, 0)
+
+        if (user.id != null && user.id.name.isNotEmpty() && user.id.value.isNotEmpty()) {
+            detailBinding.textViewUserId.text = getString(R.string.detail_activity_user_id, user.id.name, user.id.value)
+        } else {
+            detailBinding.textViewUserId.visibility = View.GONE
+        }
     }
 
     private fun bindClick(user: User) {
