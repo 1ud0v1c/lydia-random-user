@@ -11,6 +11,10 @@ import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+/**
+ * Entry point of the Koin library to make dependency injection.
+ * Useful to simplify repositories access to the network or the database.
+ */
 class LydiaApplication: Application() {
     override fun onCreate() {
         super.onCreate()

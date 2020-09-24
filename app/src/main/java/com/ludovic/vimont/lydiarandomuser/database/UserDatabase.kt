@@ -5,6 +5,9 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.ludovic.vimont.lydiarandomuser.model.User
 
+/**
+ * Handle the creation of the database by extending RoomDatabase.
+ */
 @Database(entities = [User::class], version = 1)
 @TypeConverters(UserTypeConverter::class)
 abstract class UserDatabase: RoomDatabase() {

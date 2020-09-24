@@ -5,24 +5,30 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.ludovic.vimont.lydiarandomuser.R
 import com.ludovic.vimont.lydiarandomuser.databinding.ActivityHomeBinding
-import com.ludovic.vimont.lydiarandomuser.helper.DataStatus
+import com.ludovic.vimont.lydiarandomuser.helper.viewmodel.DataStatus
 import com.ludovic.vimont.lydiarandomuser.helper.network.ConnectionLiveData
 import com.ludovic.vimont.lydiarandomuser.helper.network.NetworkHelper
 import com.ludovic.vimont.lydiarandomuser.screens.detail.DetailActivity
 
+/**
+ * Listing of the users recover thanks to the Random User API.
+ * @see HomeUserAdapter
+ */
 class HomeActivity : AppCompatActivity() {
     companion object {
         const val KEY_USER_EMAIL = "home_activity_user_email"
     }
+    private var hasLostInternetOnce: Boolean = false
     private val userAdapter = HomeUserAdapter(ArrayList())
+    private val homeViewModel: HomeViewModel by viewModels()
     private lateinit var mainBinding: ActivityHomeBinding
-    private lateinit var homeViewModel: HomeViewModel
     private lateinit var connectionLiveData: ConnectionLiveData
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,7 +49,6 @@ class HomeActivity : AppCompatActivity() {
         }
 
         connectionLiveData = ConnectionLiveData(applicationContext)
-        homeViewModel = ViewModelProvider.AndroidViewModelFactory(application).create(HomeViewModel::class.java)
         updateNetworkStatus()
 
         homeViewModel.loadUsers()
@@ -52,9 +57,28 @@ class HomeActivity : AppCompatActivity() {
 
     private fun updateNetworkStatus() {
         homeViewModel.isNetworkAvailable.value = NetworkHelper.isOnline(applicationContext)
-        connectionLiveData.observe(this) {
-            homeViewModel.isNetworkAvailable.value = it
+        connectionLiveData.observe(this) { hasNetwork ->
+            homeViewModel.isNetworkAvailable.value = hasNetwork
+
+            if (hasNetwork) {
+                if (hasLostInternetOnce) {
+                    displayNetworkStatus(true)
+                    hasLostInternetOnce = false
+                }
+            } else {
+                displayNetworkStatus(false)
+                hasLostInternetOnce = true
+            }
         }
+    }
+
+    private fun displayNetworkStatus(hasNetwork: Boolean) {
+        val text: String = if (hasNetwork) {
+            getString(R.string.home_activity_user_has_internet_connection)
+        } else {
+            getString(R.string.home_activity_user_has_no_internet_connection)
+        }
+        Snackbar.make(mainBinding.root, text, Snackbar.LENGTH_SHORT).show()
     }
 
     private fun updateUsersList() {

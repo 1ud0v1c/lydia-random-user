@@ -5,6 +5,11 @@ import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
+/**
+ * Represent the access point for the Random User API.
+ * We fetch the data by batch of ten items.
+ * @see: https://randomuser.me/api/1.0/?seed=lydia&results=10&page=1
+ */
 interface RandomUserAPI {
     companion object {
         const val BASE_URL = "https://randomuser.me/api/1.0/"

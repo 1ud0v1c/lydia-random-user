@@ -4,6 +4,9 @@ import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.ludovic.vimont.lydiarandomuser.model.User
 
+/**
+ * Provide a simple solution to transform inner object of User to a string format.
+ */
 class UserTypeConverter {
     private val gson = Gson()
 

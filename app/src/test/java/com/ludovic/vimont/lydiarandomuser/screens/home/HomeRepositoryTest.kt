@@ -5,8 +5,8 @@ import android.os.Build
 import androidx.test.core.app.ApplicationProvider
 import com.ludovic.vimont.lydiarandomuser.api.RandomUserAPI
 import com.ludovic.vimont.lydiarandomuser.database.UserDatabase
-import com.ludovic.vimont.lydiarandomuser.helper.DataStatus
-import com.ludovic.vimont.lydiarandomuser.helper.StateData
+import com.ludovic.vimont.lydiarandomuser.helper.viewmodel.DataStatus
+import com.ludovic.vimont.lydiarandomuser.helper.viewmodel.StateData
 import com.ludovic.vimont.lydiarandomuser.model.User
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking

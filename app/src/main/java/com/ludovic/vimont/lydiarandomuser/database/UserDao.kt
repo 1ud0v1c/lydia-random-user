@@ -3,6 +3,10 @@ package com.ludovic.vimont.lydiarandomuser.database
 import androidx.room.*
 import com.ludovic.vimont.lydiarandomuser.model.User
 
+/**
+ * Responsible of all the access made to the user table.
+ * @see User
+ */
 @Dao
 interface UserDao {
     @Query("SELECT count(email) FROM user")

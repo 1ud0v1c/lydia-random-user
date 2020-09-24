@@ -2,8 +2,8 @@ package com.ludovic.vimont.lydiarandomuser.screens.home
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.ludovic.vimont.lydiarandomuser.helper.DataStatus
-import com.ludovic.vimont.lydiarandomuser.helper.StateData
+import com.ludovic.vimont.lydiarandomuser.helper.viewmodel.DataStatus
+import com.ludovic.vimont.lydiarandomuser.helper.viewmodel.StateData
 import com.ludovic.vimont.lydiarandomuser.model.User
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch

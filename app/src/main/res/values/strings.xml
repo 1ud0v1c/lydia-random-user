@@ -3,6 +3,8 @@
 
     <string name="action_retry">Retry</string>
 
+    <string name="home_activity_user_has_internet_connection">Network access available</string>
+    <string name="home_activity_user_has_no_internet_connection">No network available</string>
     <string name="user_adapter_user_picture_content_description">User picture</string>
     <string name="user_adapter_user_name">%s %s</string>
 
@@ -14,6 +16,5 @@
     <string name="detail_activity_user_password">Password: %s</string>
     <string name="detail_activity_user_phone">Phone: %s</string>
     <string name="detail_activity_user_cell">Cell: %s</string>
-
     <string name="detail_activity_user_picture_content_description">Detail activity user picture</string>
 </resources>

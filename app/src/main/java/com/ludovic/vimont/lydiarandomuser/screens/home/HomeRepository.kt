@@ -2,7 +2,7 @@ package com.ludovic.vimont.lydiarandomuser.screens.home
 
 import com.ludovic.vimont.lydiarandomuser.api.RandomUserAPI
 import com.ludovic.vimont.lydiarandomuser.database.UserDao
-import com.ludovic.vimont.lydiarandomuser.helper.StateData
+import com.ludovic.vimont.lydiarandomuser.helper.viewmodel.StateData
 import com.ludovic.vimont.lydiarandomuser.model.RandomUserResponse
 import com.ludovic.vimont.lydiarandomuser.model.User
 import org.koin.core.KoinComponent

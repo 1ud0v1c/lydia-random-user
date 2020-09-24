@@ -12,12 +12,16 @@ import com.ludovic.vimont.lydiarandomuser.helper.IntentHelper
 import com.ludovic.vimont.lydiarandomuser.model.User
 import com.ludovic.vimont.lydiarandomuser.screens.home.HomeActivity
 
+/**
+ * Display all the available information that we know about an user.
+ * We mainly use DataBinding to display the information about the selected user.
+ */
 class DetailActivity : AppCompatActivity() {
     companion object {
         const val FADE_IN_DURATION = 300
     }
-    private lateinit var detailBinding: ActivityDetailBinding
     private val detailViewModel: DetailViewModel by viewModels()
+    private lateinit var detailBinding: ActivityDetailBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

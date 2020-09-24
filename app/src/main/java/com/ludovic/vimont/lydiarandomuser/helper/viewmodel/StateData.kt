@@ -1,5 +1,9 @@
-package com.ludovic.vimont.lydiarandomuser.helper
+package com.ludovic.vimont.lydiarandomuser.helper.viewmodel
 
+/**
+ * LiveData wrapper to easily handle network issues and display the corresponding state through the
+ * Activity.
+ */
 class StateData<T>(val status: DataStatus,
                    val data: T?,
                    val errorMessage: String?) {
