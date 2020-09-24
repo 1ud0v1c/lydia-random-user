@@ -7,12 +7,13 @@ import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.koin.test.AutoCloseKoinTest
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
 @Config(sdk = [Build.VERSION_CODES.P], manifest = Config.NONE)
 @RunWith(RobolectricTestRunner::class)
-class UserTest {
+class UserTest: AutoCloseKoinTest() {
     private val firstName= "John"
     private val lastName = "Snow"
     private lateinit var user: User

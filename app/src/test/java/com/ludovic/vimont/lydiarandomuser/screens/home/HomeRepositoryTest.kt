@@ -4,9 +4,7 @@ import android.content.Context
 import android.os.Build
 import androidx.test.core.app.ApplicationProvider
 import com.ludovic.vimont.lydiarandomuser.api.RandomUserAPI
-import com.ludovic.vimont.lydiarandomuser.database.UserDao
 import com.ludovic.vimont.lydiarandomuser.database.UserDatabase
-import com.ludovic.vimont.lydiarandomuser.database.UserLocal
 import com.ludovic.vimont.lydiarandomuser.helper.DataStatus
 import com.ludovic.vimont.lydiarandomuser.helper.StateData
 import com.ludovic.vimont.lydiarandomuser.model.User
@@ -19,24 +17,26 @@ import org.junit.Test
 
 import org.junit.Before
 import org.junit.runner.RunWith
+import org.koin.test.AutoCloseKoinTest
+import org.koin.test.inject
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
 @Config(sdk = [Build.VERSION_CODES.P], manifest = Config.NONE)
 @RunWith(RobolectricTestRunner::class)
-class HomeRepositoryTest {
+class HomeRepositoryTest: AutoCloseKoinTest() {
     private val context: Context = ApplicationProvider.getApplicationContext()
     private val numberOfItemPerRequest: Int = RandomUserAPI.NUMBER_OF_ITEM_PER_REQUEST
     private lateinit var homeRepository: HomeRepository
 
     @Before
     fun setUp() {
-        homeRepository = HomeRepository(context)
+        homeRepository = HomeRepository()
     }
 
     @After
     fun tearDown() {
-        val userDatabase: UserDatabase = UserLocal(context).userDatabase
+        val userDatabase: UserDatabase by inject()
         runBlocking(Dispatchers.IO) {
             userDatabase.clearAllTables()
         }

@@ -1,18 +1,17 @@
 package com.ludovic.vimont.lydiarandomuser.screens.home
 
-import android.content.Context
 import com.ludovic.vimont.lydiarandomuser.api.RandomUserAPI
-import com.ludovic.vimont.lydiarandomuser.api.UserRemote
 import com.ludovic.vimont.lydiarandomuser.database.UserDao
-import com.ludovic.vimont.lydiarandomuser.database.UserLocal
 import com.ludovic.vimont.lydiarandomuser.helper.StateData
 import com.ludovic.vimont.lydiarandomuser.model.RandomUserResponse
 import com.ludovic.vimont.lydiarandomuser.model.User
+import org.koin.core.KoinComponent
+import org.koin.core.inject
 import retrofit2.Response
 
-class HomeRepository(context: Context) {
-    private val userDao: UserDao = UserLocal(context).userDatabase.userDao()
-    private val userRemoteApi: RandomUserAPI = UserRemote().api
+class HomeRepository: KoinComponent {
+    private val userDao: UserDao by inject()
+    private val userRemoteApi: RandomUserAPI by inject()
 
     suspend fun retrieveUsers(isConnectedToNetwork: Boolean, page: Int = 1): StateData<List<User>> {
         if (!isConnectedToNetwork && userDao.count() <= 0) {
