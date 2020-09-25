@@ -72,7 +72,7 @@ Here are the list of external dependencies I used for the project :
 - To handle database, I chosen [Room](https://developer.android.com/topic/libraries/architecture/room) for the efficiency to handle entities and database access.
 - I used [Coroutines](https://kotlinlang.org/docs/reference/coroutines-overview.html) to handle and dispatch result of heavy operations easily. I like the code readability produced with it.
 - I used [Glide](https://github.com/bumptech/glide) to handle image loading efficiently and have access to great caching strategy.
-- Last but not least Koin helped me to do dependency injection on target modules like network & database.
+- Last but not least [Koin](https://github.com/InsertKoinIO/koin) helped me to do dependency injection on target modules like network & database.
 
 I am used to MVP architecture but less to MVVM architecture. So I needed to [read documentation](https://developer.android.com/jetpack/guide) about it, to refresh my 
 knowledge of the subject. 
@@ -119,7 +119,7 @@ I also added intents on specific views:
 - While clicking on the user location, it opens google maps on the address of the user.
 
 ![DetailActivity dial intent](https://github.com/1ud0v1c/lydia-random-user/raw/master/data/dial_intent.png)
-![DetailActivity location intent](https://github.com/1ud0v1c/lydia-random-user/raw/master/data/map_intent.png.png)
+![DetailActivity location intent](https://github.com/1ud0v1c/lydia-random-user/raw/master/data/map_intent.png)
 
 
 ## Unit tests & Performance
