@@ -2,6 +2,7 @@ package com.ludovic.vimont.lydiarandomuser
 
 import android.app.Application
 import androidx.room.Room
+import com.ludovic.vimont.lydiarandomuser.api.OkHttpBuilder
 import com.ludovic.vimont.lydiarandomuser.api.RandomUserAPI
 import com.ludovic.vimont.lydiarandomuser.database.UserDatabase
 import org.koin.android.ext.koin.androidContext
@@ -33,6 +34,7 @@ class LydiaApplication: Application() {
             fun provideRetrofit(): Retrofit {
                 return Retrofit.Builder()
                     .baseUrl(RandomUserAPI.BASE_URL)
+                    .client(OkHttpBuilder.getClient())
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()
             }

@@ -12,6 +12,7 @@ import retrofit2.http.Query
  */
 interface RandomUserAPI {
     companion object {
+        const val HOSTNAME = "randomuser.me"
         const val BASE_URL = "https://randomuser.me/api/1.0/"
         const val NUMBER_OF_ITEM_PER_REQUEST = 10
         const val SEED = "lydia"
